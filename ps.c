@@ -3,6 +3,8 @@
 #include <string.h>
 #include <sys/types.h>
 #include <dirent.h>
+#include <stdlib.h>
+#include <unistd.h>
 //----------Defines
 #define S_PID "Pid:"
 #define S_NAME "Name:"
@@ -71,7 +73,8 @@ void get_file(char* d_name){
         }else if(strcmp(S_UID,line) == 0) {
             fscanf(file_pointer,"%255s",uid);//owner
             fscanf(file_pointer,"%255s",uid);//user
-            if(strcmp(uid,S_USERID) == 0) print_proc = 1;
+            int uidi = atoi(uid);
+            if(uidi == getuid()) print_proc = 1;
         }    
     }
     
