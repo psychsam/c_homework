@@ -18,7 +18,6 @@
 #define S_NAME "Name:"
 #define S_RSS "VmRSS:"
 #define S_UID "Uid:"
-#define S_USERID "1000"
 #define S_AFTERNAME "Umask:"
 //----------Prototypes
 void read_procs();
@@ -54,6 +53,7 @@ void read_procs(){
 void get_file(char* d_name){
     char pid[256];//process id
     char rss[256];//this can hold 115*10^75 kbytes
+    strcpy(rss,"0"); // set rss, if its not found in status file
     char name[256]; //16 byte long name allowed max, but just to be sure
     char name_temp[256];//temp var for names in file
     char uid[256]; //holds user id
@@ -90,5 +90,6 @@ void get_file(char* d_name){
         }    
     }
     
-      if(print_proc) printf("%s\t%s\t%s\n",pid,name,rss);
+    if(print_proc) printf("%s\t%s\t%s\n",pid,name,rss);
+    pid[0] = rss[0] = name[0] = name_temp[0] = uid[0] = '\0'; //empty string if it not gets overwritten next round
 }
