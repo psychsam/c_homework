@@ -6,4 +6,4 @@ cat raw.out | grep -v ps | grep -v timeout | sort -n > have.out
 cat raw2.out | grep -v "COMMAND" | grep -v ps | sort -n > want.out
 diff -w want.out have.out > delta.txt || { echo "Fail, delta is:" ; cat delta.txt ; exit 1; }
 echo "Test passed"
-rm *.txt *.out 
+rm *.txt *.out ps
